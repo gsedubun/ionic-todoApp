@@ -21,6 +21,18 @@
     update any existing page or create new pages.
   </p> -->
   <ion-list>
-    <ion-item *ngFor="let item of items" (click)="viewItem(item)">{{item.title}}</ion-item>
+    <ion-item *ngFor="let item of items" >
+      <div end class="col-md-2">
+        <button ion-button icon-only (click)="removeItem(item)" end>
+            <ion-icon name="remove-circle"></ion-icon>
+          </button>  {{item.title}}<br/>
+          <div> 
+            <small>{{item.description}}</small></div>
+        </div>
+   
+    </ion-item>
+    <ion-buttons end>
+    
+    </ion-buttons>
   </ion-list>
 </ion-content>
