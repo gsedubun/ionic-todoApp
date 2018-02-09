@@ -37,6 +37,7 @@ namespace aspnetwebapi.Controllers
 
         // POST api/values
         [HttpPost]
+        [Authorize(Roles="penulis,admin")]
         public IActionResult Post([FromBody]TodoItem value)
         {
             Db.Add(value);
@@ -45,7 +46,7 @@ namespace aspnetwebapi.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
+        [HttpPut("{id}")][Authorize(Roles="penulis,admin")]
         public IActionResult Put(int id, [FromBody]TodoItem value)
         {
             Db.Attach(value);
