@@ -7,7 +7,7 @@ namespace myAppApi.Data{
         public static void initialize(TodoDbContext db){
             db.Database.EnsureCreated();
 
-            if(db.TodoItem.Any()){
+            if(db.TodoItems.Any()){
                 return;
             }
 
@@ -15,7 +15,7 @@ namespace myAppApi.Data{
                 new TodoItem{  Title="todo 1", Description="description 1"  }
             };
 
-            db.TodoItem.AddRange(todoItem);
+            db.TodoItems.AddRange(todoItem);
             db.SaveChanges();
         }
     }

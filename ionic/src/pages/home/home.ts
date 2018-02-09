@@ -2,24 +2,26 @@ import { Component } from '@angular/core';
 import { NavController,  ModalController } from 'ionic-angular';
 import { AddItemPage } from '../add-item/add-item';
 import { TodoServiceProvider } from '../../providers/todo-service/todo-service';
-import { getSymbolIterator } from '@angular/core/src/util';
+//import { getSymbolIterator } from '@angular/core/src/util';
+import { TodoItem } from '../../models/TodoItem';
+
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  public items: any[]=[];
+  public items: TodoItem[]=[];
 
   saveItem(item) {
-    this.todoService.addTodo(item).then(data=>{
+    this.todoService.addTodo(item).then((data: TodoItem)=>{
       this.items.push(data);
       
     });
   }
   getItem(){
-    this.todoService.getTodo().then(data=>{
-      this.items=data;
+    this.todoService.getTodo().then((data: TodoItem[])=>{
+        this.items=data;
     });
   }
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public todoService: TodoServiceProvider) {

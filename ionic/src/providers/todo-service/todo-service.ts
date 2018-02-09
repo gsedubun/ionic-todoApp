@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { resolveDefinition } from '@angular/core/src/view/util';
+import { TodoItem } from '../../models/TodoItem';
 
 /*
   Generated class for the TodoServiceProvider provider.
@@ -16,7 +17,7 @@ export class TodoServiceProvider {
   getTodo(){
     return new Promise(resolve => {
       this.http.get(this.apiUrl+'/todos')
-        .subscribe(res => {
+        .subscribe((res: TodoItem[]) => {
           resolve(res);
         },error => {
           console.log(error);
@@ -27,7 +28,7 @@ export class TodoServiceProvider {
     return new Promise((resolve,reject)=>{
       this.http.post(this.apiUrl+'/todos', JSON.stringify(data),{
         headers: new HttpHeaders().set('Content-type','application/json').set("Access-Control-Allow-Origin","*")
-      }).subscribe(data=>{
+      }).subscribe((data: TodoItem)=>{
          resolve(data);
         },err=>{
           reject(err);
@@ -36,7 +37,7 @@ export class TodoServiceProvider {
   }
   remove(data){
     return new Promise((resolve,reject)=>{
-        this.http.delete(this.apiUrl+'/todos/'+data.id).subscribe(data=>{
+        this.http.delete(this.apiUrl+'/todos/'+data.id).subscribe((data: TodoItem)=>{
           resolve(data);
         },error=>{
           console.log(error);

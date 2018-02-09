@@ -2,26 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using aspnetwebapi.Models;
 using Microsoft.EntityFrameworkCore;
-using myAppApi.Models;
 
-namespace myAppApi.Controllers
+namespace aspnetwebapi.Controllers
 {
+     //[Authorize]
     [Route("api/[controller]")]
     public class TodosController : Controller
     {
-        public TodoDbContext Db { get; }
+        public tododbContext Db { get; }
 
-        public TodosController(TodoDbContext dbContext)
+        public TodosController(tododbContext dbContext)
         {
              this.Db = dbContext;
         }
         // GET api/values
         [HttpGet]
+        [Authorize]
         public IActionResult Get()
         {
-            var todos = Db.TodoItem.ToList();
+            var todos = Db.TodoItems.ToList();
             return Ok(todos);
         }
 
@@ -29,7 +32,7 @@ namespace myAppApi.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var data = Db.TodoItem.Find(id);
+            var data = Db.TodoItems.Find(id);
             return Ok(data);
         }
 
@@ -57,10 +60,10 @@ namespace myAppApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var item = Db.TodoItem.Find(id);
+            var item = Db.TodoItems.Find(id);
             if(item!=null)
             {
-                Db.TodoItem.Remove(item);
+                Db.TodoItems.Remove(item);
                 Db.SaveChanges();
             }
             return NoContent();

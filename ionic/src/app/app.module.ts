@@ -14,6 +14,8 @@ import {AddItemPage} from '../pages/add-item/add-item';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TodoServiceProvider } from '../providers/todo-service/todo-service';
+import { AuthProvider } from '../providers/auth/auth';
+import { LoginPage } from '../pages/login/login';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,8 @@ import { TodoServiceProvider } from '../providers/todo-service/todo-service';
     ContactPage,
     HomePage,
     TabsPage,
-    AddItemPage
+    AddItemPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -36,13 +39,17 @@ import { TodoServiceProvider } from '../providers/todo-service/todo-service';
     ContactPage,
     HomePage,
     TabsPage,
-    AddItemPage
+    AddItemPage,
+    LoginPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    TodoServiceProvider
+    TodoServiceProvider,
+    AuthProvider
   ]
 })
-export class AppModule {}
+export class AppModule {
+  
+}
