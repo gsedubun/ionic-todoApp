@@ -14,7 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using myAppApi.Models;
-using Providers;
+using myAppApi.Providers;
 
 namespace myAppApi
 {
@@ -33,16 +33,18 @@ namespace myAppApi
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
             services.AddAuthorization();
             services.AddMvc();
+            
             var signingKeys = new MySigningCredentialStore().GetSigningCredentialsAsync().Result;
             var validationKeys = RsaKeyGenerationResult.GetRsaSecurityKey();
             var authOpt = new AuthenticationOptions { };
+            
             services.AddIdentityServer()
-            .AddSigningCredential(signingKeys)
-            .AddValidationKeys(new AsymmetricSecurityKey[] { validationKeys })
-            .AddResourceOwnerValidator<MyUserPasswordValidator>()
-            .AddClientStore<MyClient>()
-            .AddResourceStore<MyResourceStore>()
-            .AddJwtBearerClientAuthentication();
+                .AddSigningCredential(signingKeys)
+                .AddValidationKeys(new AsymmetricSecurityKey[] { validationKeys })
+                .AddResourceOwnerValidator<MyUserPasswordValidator>()
+                .AddClientStore<MyClient>()
+                .AddResourceStore<MyResourceStore>()
+                .AddJwtBearerClientAuthentication();
 
             services.AddDbContext<TodoDbContext>(opt =>
             {

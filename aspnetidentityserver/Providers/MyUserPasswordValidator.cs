@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using myAppApi.Models;
 
-namespace Providers
+namespace myAppApi.Providers
 {
     public class MyUserPasswordValidator : IdentityServer4.Validation.IResourceOwnerPasswordValidator
     {

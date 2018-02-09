@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace aspnetwebapi.Controllers
 {
-     //[Authorize]
+     [Authorize]
     [Route("api/[controller]")]
     public class TodosController : Controller
     {
@@ -21,7 +21,6 @@ namespace aspnetwebapi.Controllers
         }
         // GET api/values
         [HttpGet]
-        [Authorize]
         public IActionResult Get()
         {
             var todos = Db.TodoItems.ToList();

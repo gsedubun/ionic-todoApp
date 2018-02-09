@@ -28,11 +28,14 @@ namespace aspnetwebapi
             services.AddDbContext<tododbContext>(d=>{
                 d.UseSqlServer(Configuration.GetConnectionString("todoConnection"));
             });
-            services.AddMvcCore().AddAuthorization().AddJsonFormatters();
+            //services.AddMvcCore().AddAuthorization().AddJsonFormatters();
+            services.AddMvc();
             services.AddAuthentication("Bearer").AddIdentityServerAuthentication(opt => {
-                opt.Authority = "http://localhost:64381";
+                opt.Authority = "http://localhost:5000";
                 opt.RequireHttpsMetadata = false;
-                opt.ApiName = "webapi1";
+                opt.ApiName = "api";
+                opt.ApiSecret="rahasia";
+                
             });
         }
 

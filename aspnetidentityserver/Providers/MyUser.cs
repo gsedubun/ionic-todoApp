@@ -4,7 +4,7 @@ using IdentityServer4.Models;
 using IdentityServer4.Stores;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
-namespace Providers
+namespace myAppApi.Providers
 {
     internal class MyClient : IClientStore
     {
