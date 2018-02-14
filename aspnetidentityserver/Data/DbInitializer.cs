@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using myAppApi.Models;
+using aspnetidentityserver.Models;
 
 namespace myAppApi.Data{
     public static class DbInitializer{

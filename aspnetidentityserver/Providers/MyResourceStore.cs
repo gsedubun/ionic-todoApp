@@ -8,7 +8,7 @@ using IdentityServer4.Models;
 using IdentityServer4.Stores;
 using Microsoft.IdentityModel.Tokens;
 
-namespace myAppApi.Providers
+namespace aspnetidentityserver.Providers
 {
     public class MySigningCredentialStore : ISigningCredentialStore
     {

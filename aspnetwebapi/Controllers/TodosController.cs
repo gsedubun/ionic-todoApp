@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace aspnetwebapi.Controllers
 {
-     [Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     public class TodosController : Controller
     {
@@ -21,6 +21,7 @@ namespace aspnetwebapi.Controllers
         }
         // GET api/values
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Get()
         {
             var todos = Db.TodoItems.ToList();
@@ -40,6 +41,9 @@ namespace aspnetwebapi.Controllers
         [Authorize(Roles="penulis,admin")]
         public IActionResult Post([FromBody]TodoItem value)
         {
+            if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }
             Db.Add(value);
             Db.SaveChanges();
             return Ok(value);
@@ -49,6 +53,9 @@ namespace aspnetwebapi.Controllers
         [HttpPut("{id}")][Authorize(Roles="penulis,admin")]
         public IActionResult Put(int id, [FromBody]TodoItem value)
         {
+            if(!ModelState.IsValid){
+                return BadRequest(ModelState);
+            }
             Db.Attach(value);
             Db.Entry(value).State = EntityState.Modified;
             Db.SaveChanges();

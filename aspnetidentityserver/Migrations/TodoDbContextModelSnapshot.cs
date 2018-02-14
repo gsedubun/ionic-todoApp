@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using myAppApi.Models;
+using aspnetidentityserver.Models;
 using System;
 
-namespace myAppApi.Migrations
+namespace aspnetidentityserver.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
     partial class TodoDbContextModelSnapshot : ModelSnapshot

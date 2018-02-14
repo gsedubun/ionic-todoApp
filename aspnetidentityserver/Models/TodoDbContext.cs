@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
-namespace myAppApi.Models{
+namespace aspnetidentityserver.Models{
     public class TodoDbContext : DbContext{
         public TodoDbContext(DbContextOptions<TodoDbContext> options) : base(options)
         {

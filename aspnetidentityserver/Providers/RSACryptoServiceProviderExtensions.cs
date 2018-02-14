@@ -2,7 +2,7 @@ using System;
 using System.Security.Cryptography;
 using System.Xml;
 
-namespace myAppApi.Providers
+namespace aspnetidentityserver.Providers
 {
     public static class RSACryptoServiceProviderExtensions
 

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using myAppApi.Models;
+using aspnetidentityserver.Models;
 
-namespace myAppApi.Providers
+namespace aspnetidentityserver.Providers
 {
     public class MyUserPasswordValidator : IdentityServer4.Validation.IResourceOwnerPasswordValidator
     {

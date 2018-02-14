@@ -13,10 +13,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using myAppApi.Models;
-using myAppApi.Providers;
+using aspnetidentityserver.Models;
+using aspnetidentityserver.Providers;
 
-namespace myAppApi
+namespace aspnetidentityserver
 {
     public class Startup
     {
@@ -50,7 +50,12 @@ namespace myAppApi
             {
                 opt.UseSqlServer(Configuration.GetConnectionString("todoConnection"));
             });
-
+            services.AddCors(cors=>{
+                cors.AddPolicy("localcors", d=>{
+                    d.AllowAnyOrigin();
+                    d.AllowAnyMethod();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,7 +68,10 @@ namespace myAppApi
             app.UseIdentityServer();
             //app.UseCors("localCors");
 
+
             app.UseMvcWithDefaultRoute();
+
+            
         }
     }
 }

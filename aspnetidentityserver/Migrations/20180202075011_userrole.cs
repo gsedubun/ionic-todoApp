@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace myAppApi.Migrations
+namespace aspnetidentityserver.Migrations
 {
     public partial class userrole : Migration
     {

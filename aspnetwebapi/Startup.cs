@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace aspnetwebapi
 {
@@ -25,17 +27,35 @@ namespace aspnetwebapi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<tododbContext>(d=>{
+            var connstring = Configuration.GetConnectionString("todoConnection");
+            Console.WriteLine(connstring);
+
+            services.AddDbContext<tododbContext>(d =>
+            {
                 d.UseSqlServer(Configuration.GetConnectionString("todoConnection"));
             });
             //services.AddMvcCore().AddAuthorization().AddJsonFormatters();
             services.AddMvc();
-            services.AddAuthentication("Bearer").AddIdentityServerAuthentication(opt => {
-                opt.Authority = "http://localhost:5000";
+            services.AddAuthentication("Bearer").AddIdentityServerAuthentication(opt =>
+            {
+                opt.Authority = "http://localhost:82";
+
                 opt.RequireHttpsMetadata = false;
                 opt.ApiName = "api";
-                opt.ApiSecret="rahasia";
-                
+                opt.ApiSecret = "rahasia";
+
+            });
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Description = "todo asp.net core web api",
+                    Title = "todo-aspnetcore-webapi",
+                    Version = "v1",
+                    TermsOfService = "none",
+                    Contact = new Contact { Email = "gadael.sedubun@visionet.co.id", Name = "GS", Url = "http://www.visionet.co.id" }
+                });
             });
         }
 
@@ -48,6 +68,11 @@ namespace aspnetwebapi
             }
             app.UseAuthentication();
             app.UseMvc();
+            app.UseSwagger();
+            app.UseSwaggerUI(d =>
+            {
+                d.SwaggerEndpoint("/swagger/v1/swagger.json", "todo asp.net core web api");
+            });
         }
     }
 }

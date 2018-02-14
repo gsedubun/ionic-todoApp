@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using IdentityServer4.Validation;
 
-namespace myAppApi.Providers
+namespace aspnetidentityserver.Providers
 {
     public class CustomTokenValidator : ICustomTokenRequestValidator
     {
