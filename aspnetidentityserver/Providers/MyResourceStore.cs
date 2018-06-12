@@ -10,36 +10,6 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace aspnetidentityserver.Providers
 {
-    public class MySigningCredentialStore : ISigningCredentialStore
-    {
-        public Task<SigningCredentials> GetSigningCredentialsAsync()
-        {
-            var handler= new JwtSecurityTokenHandler();
-            RSACryptoServiceProvider publicAndPrivate = new RSACryptoServiceProvider();
-            RsaKeyGenerationResult keyGenerationResult = RsaKeyGenerationResult.GenerateKeys();
-            publicAndPrivate.FromXmlStringCustom(keyGenerationResult.PublicAndPrivateKey);
-
-            var s = new SigningCredentials(new RsaSecurityKey(publicAndPrivate), SecurityAlgorithms.RsaSha256);
-            return Task.FromResult(s);
-        }
-
-        
-    }
-
-    public class MyValidationKeyStore : IValidationKeysStore
-    {
-        public Task<IEnumerable<SecurityKey>> GetValidationKeysAsync()
-        {
-            RSACryptoServiceProvider publicAndPrivate = new RSACryptoServiceProvider();
-            RsaKeyGenerationResult keyGenerationResult = RsaKeyGenerationResult.GenerateKeys();
-            publicAndPrivate.FromXmlStringCustom(keyGenerationResult.PublicAndPrivateKey);
-
-            var keys = new List<SecurityKey>() { new RsaSecurityKey(publicAndPrivate)};
-            return Task.FromResult(keys.AsEnumerable());
-        }
-
-       
-    }
     internal class MyResourceStore : IResourceStore
     {
         public Task<ApiResource> FindApiResourceAsync(string name)
